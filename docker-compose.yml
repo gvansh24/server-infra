@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  nginx-gateway:
+    container_name: master_nginx
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - web-gateway
+
+networks:
+  web-gateway:
+    name: web-gateway
+    external: true
