@@ -17,12 +17,12 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Update this path if the repository is located elsewhere on your server
-            cd ~/server-infra
+            # Repos live under ~/server on the openclaw host
+            cd ~/server/server-infra
             git pull origin main
-            
-            # Start/Update the container
-            docker compose up -d
-            
+
+            # Start/Update the container (docker needs sudo on this host)
+            sudo docker compose up -d
+
             # Reload NGINX without dropping requests
-            docker exec master_nginx nginx -s reload
+            sudo docker exec master_nginx nginx -s reload
