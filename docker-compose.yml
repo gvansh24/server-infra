@@ -8,9 +8,11 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "8080:8080"   # God's Eye View (servers/gods-eye-view.conf)
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
       - ./routes:/etc/nginx/routes:ro
+      - ./servers:/etc/nginx/servers:ro
     networks:
       - web-gateway
 
